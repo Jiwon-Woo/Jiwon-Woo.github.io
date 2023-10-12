@@ -35,8 +35,8 @@ const config: GatsbyConfig = {
         ],
         externalLinks: [
           {
-            name: `Twitter`,
-            url: `https://twitter.com/lekoarts_de`,
+            name: `GitHub`,
+            url: `https://github.com/Jiwon-Woo`,
           },
           {
             name: `Homepage`,
