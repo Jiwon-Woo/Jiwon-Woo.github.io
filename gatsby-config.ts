@@ -35,12 +35,12 @@ const config: GatsbyConfig = {
         ],
         externalLinks: [
           {
-            name: `GitHub`,
-            url: `https://github.com/Jiwon-Woo`,
+            name: `LinkedIn`,
+            url: `https://www.linkedin.com/in/jiwon-woo-78b900230`,
           },
           {
-            name: `Homepage`,
-            url: `https://www.lekoarts.de?utm_source=minimal-blog&utm_medium=Starter`,
+            name: `GitHub`,
+            url: `https://github.com/Jiwon-Woo`,
           },
         ],
       },
