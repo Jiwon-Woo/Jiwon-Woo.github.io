@@ -21,11 +21,6 @@
 <p class="css-z0logh">기존 검색 기능에는 아래와 같은 한계점이 있었습니다.</p>
 <ol class="css-15vy6y4">
 <li class="css-zezy6m">
-<p class="css-z0logh">자모 분리 검색 불가능 (예. ‘파있’과 ‘파이썬’ 검색 결과가 매우 상이)</p>
-<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/74583716-3462-43ef-9819-b70d8554b468" width="49%" height="49%"/>
-<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/ddf0bf3e-0e27-4b28-a983-0cfeca4dd96c" width="49%" height="49%"/>
-</li>
-<li class="css-zezy6m">
 <p class="css-z0logh">검색어에 띄어쓰기를 포함한 결과와 불포함한 결과가 매우 상이</p>
 <img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/5791e5f0-6931-49e3-a768-b12cb5ffb7b6" width="49%" height="49%"/>
 <img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/1373135f-fd7a-49bb-b8f6-8dfea5b511e1" width="49%" height="49%"/>
@@ -33,6 +28,11 @@
 <li class="css-zezy6m">
 <p class="css-z0logh">도서명, 저자, 출판사 복합 검색 불가능</p>
 <img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/184728d3-0ba3-4d06-9773-179dec2f12ea" width="49%" height="49%"/>
+</li>
+<li class="css-zezy6m">
+<p class="css-z0logh">자모 분리 검색 불가능 (예. ‘파있’과 ‘파이썬’ 검색 결과가 매우 상이)</p>
+<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/74583716-3462-43ef-9819-b70d8554b468" width="49%" height="49%"/>
+<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/ddf0bf3e-0e27-4b28-a983-0cfeca4dd96c" width="49%" height="49%"/>
 </li>
 </ol>
 <p class="css-z0logh">이러한 한계를 개선하기 위해 해당 프로젝트에서 유연한 검색을 가능하게 하고, 몇 가지 검색 편의 기능을 도입하여 원하는 자료를 찾는데 소요되는 단계를 단축했습니다.</p>
@@ -43,18 +43,18 @@
 <h3 class="css-ns8t27"><strong class="css-zezy6m">검색 기능 개선 이후</strong></h3>
 <ol class="css-15vy6y4">
 <li class="css-zezy6m">
-<p class="css-z0logh">‘파있’과 ‘ㅍㅇㅆ’ 검색 시 ‘파이썬’ 검색 결과와 유사</p>
-<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/b5ca4da3-2040-48f6-b331-5ac55a30fb1f" width="49%" height="49%"/>
-<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/d4c60714-2dbb-4f24-a57c-6e384282c7fa" width="49%" height="49%"/>
-</li>
-<li class="css-zezy6m">
-<p class="css-z0logh">‘자바스크립트’와 ‘자바 스크립트’의 결과의 교집합이 생기며, ‘자바 스크립트’의 경우 전문 검색에 의해 ‘자바’나 ‘스크립트’ 둘 중 하나만 포함해도 검  색 결과에 반환됨</p>
+<p class="css-z0logh">‘자바스크립트’와 ‘자바 스크립트’의 결과의 교집합이 생기며, ‘자바 스크립트’의 경우 전문 검색에 의해 ‘자바’나 ‘스크립트’ 둘 중 하나만 포함해도 검색 결과에 반환됨</p>
 <img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/9a0a99e3-c7e2-4305-99ac-088857c90941" width="49%" height="49%"/>
 <img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/4d45e8b3-1a9d-4965-b594-30bb78ca11e9" width="49%" height="49%"/>
 </li>
 <li class="css-zezy6m">
 <p class="css-z0logh">도서명, 저자 복합 검색 가능</p>
 <img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/cf886c9a-5010-4a27-a52a-d256c2986961" width="49%" height="49%"/>
+</li>
+<li class="css-zezy6m">
+<p class="css-z0logh">‘파있’과 ‘ㅍㅇㅆ’ 검색 시 ‘파이썬’ 검색 결과와 유사</p>
+<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/b5ca4da3-2040-48f6-b331-5ac55a30fb1f" width="49%" height="49%"/>
+<img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/d4c60714-2dbb-4f24-a57c-6e384282c7fa" width="49%" height="49%"/>
 </li>
 </ol>
 <br/>
@@ -63,7 +63,7 @@
 <p class="css-z0logh">기존 서비스에서는 기본 검색 기능을 제외하고, 타 사이트에서 자주 볼 수 있는 자동완성, 검색 결과 미리보기, 최근 검색어, 인기 검색어 등의 검색 편의 기능이 없었습니다. 그래서 사용자의 검색 경험을 개선하고, 다른 사용자의 검색어를 공개하여 검색 유도를 하기 위한 목적으로 인기 검색어를 도입하게 되었습니다.</p>
 <h3 class="css-ns8t27"><strong class="css-zezy6m">기술적 고민 및 구현 방법</strong></h3>
 <p class="css-z0logh">인기 검색어 기능을 오픈하자마자 인기 검색어 순위를 제공하고 싶었기 때문에 이전에 쌓인 로그를 활용했습니다. 7~8월 중 보름간 들어온 도서 검색 Request를 파싱하여 검색어와 검색 로그 테이블에 저장했습니다.</p>
-<p class="css-z0logh">좀 더 다양한 볼거리를 위해 인기 검색어 순위뿐만 아니라 해당 인기 검색어의 순위 변동을 구현하기로 했습니다. 순위 변동 구현을 위해서는 어느 지점을 이전 인기 검색어로 생각할지, 이전 인기 검색어를 어떻게 저장할지에 대해 고민했습니다. 이미 기존에 node-schedule 라이브러리를 이용하여 스케줄러를 구성하고 있 었기 때문에, 해당 스케줄러를 활용하여 0시 42분마다 하루 전 인기 검색어를 집계하고, 이를 순위 변동의 기준으로 사용했습니다. 순위 변동의 기준은 가장 최근 것 하나만 필요하고 운영 서버를 한 대만 이용하고 있기 때문에 애플리케이션 단에 캐싱해 두었습니다.</p>
+<p class="css-z0logh">좀 더 다양한 볼거리를 위해 인기 검색어 순위뿐만 아니라 해당 인기 검색어의 순위 변동을 구현하기로 했습니다. 순위 변동 구현을 위해서는 어느 지점을 이전 인기 검색어로 생각할지, 이전 인기 검색어를 어떻게 저장할지에 대해 고민했습니다. 이미 기존에 node-schedule 라이브러리를 이용하여 스케줄러를 구성하고 있었기 때문에, 해당 스케줄러를 활용하여 0시 42분마다 하루 전 인기 검색어를 집계하고, 이를 순위 변동의 기준으로 사용했습니다. 순위 변동의 기준은 가장 최근 것 하나만 필요하고 운영 서버를 한 대만 이용하고 있기 때문에 애플리케이션 단에 캐싱해 두었습니다.</p>
 <p class="css-z0logh">검색량이 풍부하지 않기 때문에 인기 검색어를 어떤 방식으로 10개를 채울지 기준을 세웠습니다. 먼저 인기 검색어를 요청한 시점부터 24시간 이내에 N회 이상 발생한 검색어를 추출합니다. 만약 추출된 검색어의 개수가 10개 미만이면 요청 시점으로부터 한 달 이내 N회 이상 발생한 검색어를 한 번 더 추출하여 채워 넣습니다. 그래도 부족하다면 전 기간에 걸쳐 N회 이상 발생한 검색어를 추가로 추출하도록 했습니다.</p>
 <h3 class="css-ns8t27"><strong class="css-zezy6m">인기 검색어 화면</strong></h3>
 <img src="https://github.com/jiphyeonjeon-42/discussion/assets/74581396/4b1ac1e0-2598-43c8-b570-2adf36ad4063" alt="인기1" class="css-elcu2x"/>
@@ -73,6 +73,6 @@
           <script
             id="gatsby-chunk-mapping"
           >
-            window.___chunkMapping="{\"app\":[\"/app-4e5f2bd1f7ddc55f44d9.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx-411f1f496e2621f9b26d.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-homepage-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-homepage-query-tsx-339da5abfb58d1c39a32.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-page-query-tsx-content-file-path-content-pages-about-index-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-page-query-tsx-content-file-path-content-pages-about-index-mdx-67f6cd6316ad4f0787de.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-jiphyeonjeon-index-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-jiphyeonjeon-index-mdx-e37ffdd131e633630bc5.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-1-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-1-week-mdx-a81b2652bc2506089ab5.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-2-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-2-week-mdx-94c279006264f1b3a828.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-3-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-3-week-mdx-04f4c4e43e9d03601ab6.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-4-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-4-week-mdx-05ed1b0e9f17bb95e5fa.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx-d99e116b314fece025d8.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx-42a5e574771d676e7e52.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-fedef0cd57de257ebeca.js\"]}";
+            window.___chunkMapping="{\"app\":[\"/app-4e5f2bd1f7ddc55f44d9.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-blog-query-tsx-411f1f496e2621f9b26d.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-homepage-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-homepage-query-tsx-0a04d935586089b100a9.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-page-query-tsx-content-file-path-content-pages-about-index-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-page-query-tsx-content-file-path-content-pages-about-index-mdx-67f6cd6316ad4f0787de.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-jiphyeonjeon-index-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-jiphyeonjeon-index-mdx-2ca20d4ed770efc4e10b.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-1-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-1-week-mdx-a81b2652bc2506089ab5.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-2-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-2-week-mdx-94c279006264f1b3a828.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-3-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-3-week-mdx-04f4c4e43e9d03601ab6.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-4-week-mdx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-post-query-tsx-content-file-path-content-posts-ossca-redis-2023-4-week-mdx-05ed1b0e9f17bb95e5fa.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tag-query-tsx-d99e116b314fece025d8.js\"],\"component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx\":[\"/component---node-modules-lekoarts-gatsby-theme-minimal-blog-core-src-templates-tags-query-tsx-42a5e574771d676e7e52.js\"],\"component---src-pages-404-tsx\":[\"/component---src-pages-404-tsx-fedef0cd57de257ebeca.js\"]}";
           </script>
-        <script>window.___webpackCompilationHash="03ef409c74156ed2b9a9";</script><script src="/webpack-runtime-5a60880aec426e1c5624.js" async></script><script src="/framework-f689a2a97f4fb6f27065.js" async></script><script src="/app-4e5f2bd1f7ddc55f44d9.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
+        <script>window.___webpackCompilationHash="227bf0f935745f4abf0d";</script><script src="/webpack-runtime-ea4848af3c8ad2d156f2.js" async></script><script src="/framework-f689a2a97f4fb6f27065.js" async></script><script src="/app-4e5f2bd1f7ddc55f44d9.js" async></script><!-- slice-end id="_gatsby-scripts-1" --></body></html>
