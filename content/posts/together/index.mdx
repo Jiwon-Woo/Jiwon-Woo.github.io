@@ -6,18 +6,18 @@ tags:
   - DTO
 ---
 
-### 의문점 🤔
+## 의문점 🤔
 
 TypeScript와 NestJS로 개발하던 도중, 문득 그런 의문이 들었다.
 
-_'DTO는 왜 class로 구현하는걸까..?'_
+_'DTO(Data Transfer Object)는 왜 class로 구현하는걸까..?'_
 
 그저 타입 체크를 위해서라면 interface나 type으로도 가능한게 아닌가?<br/>
 그런데 왜 많은 레퍼런스에서, 그리고 공식 문서에서도 class로 DTO를 구현하는 걸까?
 
 <br /><br />
 
-### 💡 궁금증 해결..!
+## 💡 궁금증 해결..!
 
 의외로 궁금증은 빠르게 해결할 수 있었다.. <br/>
 심지어 공식 문서에 기재 되어 있던 내용이었던 것...
@@ -80,3 +80,16 @@ export class CreateMeetupDto {
 
 위는 내가 실제로 프로젝트에서 사용하는 DTO 중 하나다.<br/>
 해당 DTO에서도 `@IsString()`, `@IsNotEmpty()`, `@MaxLength(255)` 등을 활용하여 유효성 검사를 하는 것을 볼 수 있다.
+
+<br /><br />
+
+## 타입과 값 구분하기
+> 참고: 이펙티브 타입스크립트 - 아이템 8 타입 공간과 값 공간의 심벌 구분하기
+
+[타입스크립트 플레이그라운드](https://www.typescriptlang.org/ko/play)는 타입스크립트 코드를 자바스크립트로 변환한 결과물을 보여준다.<br/>
+컴파일 과정에서 타입은 제거되기 때문에, 사라지는 것이 있다면 타입일 것이다.
+
+![playground](./playground.png)
+
+type과 interface 예약어를 이용하여 선언하면 타입이 되고, class나 const, let로 선언하면 값으로 사용할 수 있다.<br/>
+특히, class와 enum은 상황에 따라 타입과 값이 전부 가능한 예약어이다.
