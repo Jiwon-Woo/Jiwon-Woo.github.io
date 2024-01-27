@@ -1,0 +1,139 @@
+---
+title: NestJS - CORS와 Cookie
+date: 2024-01-28
+tags:
+  - NestJS
+  - CORS
+  - cookie
+---
+
+### NestJS - main.ts
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  ...
+
+  // cors 설정
+  app.enableCors({
+    origin: [process.env.FRONT_URL],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
+
+  // cookie 설정
+  app.use(cookieParser());
+
+  ...
+
+  const port = process.env.BACK_PORT || 9999;
+  await app.listen(port);
+  Logger.log(`Server running on ${port}`);
+}
+bootstrap();
+```
+
+<br/>
+
+### Cookie
+```bash
+npm install cookie-parser @types/cookie-parser
+```
+```ts
+app.use(cookieParser());
+```
+다음과 같이 `cookie-parser` 패키지를 다운받고 쿠키 설정을 해주면, 브라우저로부터 받은 쿠키를 분석할 수 있게 된다.
+
+만약 프록시 서버를 사용하여 CORS 설정을 사용할 필요가 없다면, 위의 두줄만으로 쿠키를 쓸 수 있다. 그러나 만약 CORS 설정을 해주었다면, 쿠키를 사용하기 위해서는 추가적인 옵션 설정이 필요하다.
+
+<br/>
+
+### CORS
+```ts
+app.enableCors({
+  origin: [process.env.FRONT_URL],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  credentials: true,
+});
+```
+사실 옵션없이 `app.enableCors()` 만 사용해도 CORS 에러 자체는 해결이 가능하다.
+
+하지만 위에서 언급했던 쿠키 사용을 위해 `origin` 과 `credentials` 옵션을 사용해주었다. 쿠키를 사용하고 싶다면 `credential` 은 `true` 로 해주고, `origin` 은 쿠키를 받아올 주소를 적어준다.
+
+`origin` 옵션은 배열도 가능하므로, 여러 주소를 한번에 넣을 수도 있다. 다만 주의할 점은 쿠키를 사용하기 위해서는 '*'로 설정해선 안된다는 점이다. 그 이유는 아래에 기술한다.
+
+<br/>
+
+### withCredentials
+마지막으로 프론트에서도 백엔드에 쿠키를 사용하는 api, 즉 인증정보를 포함한 요청을 할 때마다 `withCredentials` 옵션을 사용해야한다.
+
+```ts
+...
+
+await axios
+  .post(
+    "/api/users/me",
+    {
+      ...
+    },
+    { withCredentials: true }
+  )
+
+...
+```
+
+<br/><br/>
+
+### CORS 동작 시나리오
+
+CORS의 동작 방식은 3가지가 있다.
+그 중 위에서 서술한 cookie와 같이 인증 정보가 포함된 요청은 3가지 중 **Credentialed Request**와 관련이 깊다.
+3가지 시나리오를 간단히 소개하겠다.
+
+<br/>
+
+#### Preflight Request
+
+웹개발을 할때 가장 많이 만나게 되는 방식이다.
+해당 시나리오에서 브라우저는 본 요청을 바로 보내지 않고 브라우저가 예비 요청을 보내 스스로 안전한 요청인지 확인한 후 본 요청을 보낸다. 예비 요청은 http 메소드 중 `OPTIONS` 메소드를 사용한다. 이때 예비 요청의 성공여부보단 응답 헤더의 `Access-Control-Allow-Origin` 값이 더 중요하다.
+
+<br/>
+
+#### Simple Request
+
+해당 시나리오는 예비 요청 없이 본 요청을 바로 보낸 다음 브라우저가 `Access-Control-Allow-Origin` 을 보고 판단하는 방식이다. 하지만 이렇게 본 요청을 바로 보내는 것은 꽤나 까다로운 조건이 필요하다.
+
+<br/>
+
+#### Credentialed Request
+
+마지막은 인증된 요청에 대한 시나리오로, 교차 출처 통신에서 보안을 강화하고 싶을 때 사용하는 방법이다. 이제까지 우리가 다룬 cookie를 사용할 때 쓴다.
+
+기본적으로 브라우저가 제공하는 리소스 요청 API인 `XMLHttpRequest` 객체나 `fetch` API는 별도의 옵션 없이 브라우저의 쿠키 정보나 인증과 관련된 헤더를 함부로 요청에 담지 않는다. 이때 요청에 인증과 관련된 정보를 담을 수 있게 해주는 옵션이 `credentials` 이다.  `credentials` 옵션에는 3가지가 있다.
+
+| 옵션 값 | 설명 | 
+| :- | :- |
+| same-origin | 같은 출처 간 요청에만 인증 정보를 담을 수 있다 |
+| include | 모든 요청에 인증 정보를 담을 수 있다 |
+| omit | 모든 요청에 인증 정보를 담지 않는다 |
+
+만약 same-origin이나 include를 사용하여 요청에 인증정보를 포함하게 된다면, 브라우저는  `Access-Control-Allow-Origin` 뿐만 아니라 다른 항목도 좀 더 까다롭게 확인한다.
+
+요청에 인증정보가 담길 때에는 서버의 응답 헤더 `Access-Control-Allow-Origin` 필드에 `*(와일드 카드)` 를 사용하는 것도 금지되며, 어떤 출처를 허용할 것인지 정확히 명시해두어야한다. 그리고 응답 헤더에 반드시 `Access-Control-Allow-Credentials: true` 가 존재해야한다.
+
+
+
+<br/>
+
+### 참고
+> [🍪 CORS 쿠키 전송하기 (withCredentials 옵션)](https://inpa.tistory.com/entry/AXIOS-%F0%9F%93%9A-CORS-%EC%BF%A0%ED%82%A4-%EC%A0%84%EC%86%A1withCredentials-%EC%98%B5%EC%85%98)
+<br/>[NestJS | CORS 설정](https://velog.io/@suasue/NestJS-CORS-%EC%84%A4%EC%A0%95)
+<br/>[NestJS - 17. 쿠키 다루기(JWT토큰)](https://codegear.tistory.com/78)
+<br/>[[Network] What is CORS](https://snupi.tistory.com/210)
+<br/>[[보안] CORS 란? CORS 에러란?](https://jhyonhyon.tistory.com/39)
+<br/>[CORS는 왜 이렇게 우리를 힘들게 하는걸까?](https://evan-moon.github.io/2020/05/21/about-cors/)
+<br/>[쿠키(cookie), 서버 - 클라이언트 set-cookie 에러 사항들](https://cornpip.tistory.com/40)
