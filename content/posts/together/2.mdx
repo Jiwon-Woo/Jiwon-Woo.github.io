@@ -1,5 +1,5 @@
 ---
-title: NestJS - CORS와 Cookie
+title: NestJS - CORS와 Cookie 설정하기!
 date: 2024-01-28
 tags:
   - NestJS
@@ -69,7 +69,7 @@ app.enableCors({
 <br/>
 
 ### withCredentials
-마지막으로 프론트에서도 백엔드에 쿠키를 사용하는 api, 즉 인증정보를 포함한 요청을 할 때마다 `withCredentials` 옵션을 사용해야한다.
+마지막으로 프론트에서도 백엔드에 쿠키를 사용하는 api, 즉 인증정보를 포함한 요청을 할 때마다 `withCredentials` 옵션을 사용해야한다. (서버 설정 다해두고 이걸 안해줘서 삽질한 기억이 있다...)
 
 ```ts
 ...
@@ -88,7 +88,7 @@ await axios
 
 <br/><br/>
 
-### CORS 동작 시나리오
+## CORS 동작 시나리오
 
 CORS의 동작 방식은 3가지가 있다.
 그 중 위에서 서술한 cookie와 같이 인증 정보가 포함된 요청은 3가지 중 **Credentialed Request**와 관련이 깊다.
@@ -125,6 +125,12 @@ CORS의 동작 방식은 3가지가 있다.
 
 요청에 인증정보가 담길 때에는 서버의 응답 헤더 `Access-Control-Allow-Origin` 필드에 `*(와일드 카드)` 를 사용하는 것도 금지되며, 어떤 출처를 허용할 것인지 정확히 명시해두어야한다. 그리고 응답 헤더에 반드시 `Access-Control-Allow-Credentials: true` 가 존재해야한다.
 
+<br/>
+
+### 간단한 회고
+
+CORS 동작 방식에 대한 이론을 좀 더 빨리 알았더라면, 그 때 withCredentials 때문에 삽질할 일은 줄 일 수 있었을텐데... 하는 생각이 들었다.
+다시금 CS 지식에 대한 중요성을 깨닫는다..!
 
 
 <br/>
