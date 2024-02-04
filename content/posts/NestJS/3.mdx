@@ -11,6 +11,17 @@ tags:
 <br/>프로젝트 첫 시작에서 멈춰있게 되는 일반 문서와 달리 관리가 편하고, 프론트 분들과 협업하기 딱 맞는다는 생각이 든다.
 <br/>그래서 나는 프로젝트를 시작할 때, swagger를 도입하자고 적극 주장하는 편이다.
 
+swagger를 사용하는 방법에는 크게 2가지가 있다.
+<br/>하나는 YAML 파일이나 JSON 형태로 정의하는 것이고,
+> [Swagger OpenAPI Guide - Base Structure](https://swagger.io/docs/specification/basic-structure)
+![swagger-guide](./swagger-guide.png)
+
+하나는 사용하는 프레임워크 단에서 swagger를 지원하는 라이브러리를 사용하는 것이다.
+> [NestJS Docs - OpenAPI](https://docs.nestjs.com/openapi/introduction)
+![nestjs-swagger](./nestjs-swagger.png)
+
+그 중 나는 가독성이나 유지보수 측면에서 후자를 선호하며, 이 아래부터는 NestJS에서 Swagger를 다루는 방법을 간단히 소개한다.
+
 <br/>
 
 ## 패키지 설치
