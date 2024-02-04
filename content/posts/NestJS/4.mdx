@@ -1,0 +1,211 @@
+---
+title: NestJS - 데코레이터
+date: 2024-02-05
+tags:
+  - NestJS
+  - TypeScript
+  - Decorator
+---
+
+### 데코레이터(`@`)?
+
+데코레이터는 본래 TypeScript의 기능이며, 실험적으로 이용이 가능하다.
+<br/>이 데코레이터를 NestJS는 적극적으로 활용하며, 데코레이터를 통해 횡단관심사를 분리한다.
+<br/>데코레이터는 데코레이터의 이름 앞에 `@` 를 붙여 선언하므로 `@expressioin` 과 같은 형태를 가진다.
+
+#### app.controller.ts
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+@Controller()  // decorator
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get()  // decorator
+  getHello(): string {
+    return this.appService.getHello();
+  }
+}
+```
+
+#### app.service.ts
+```ts
+import { Injectable } from '@nestjs/common';
+
+@Injectable() // decorator
+export class AppService {
+  getHello(): string {
+    return 'Hello World!';
+  }
+}
+```
+
+데코레이터는 클래스, 메서드, 접근자, 프로퍼티, 매개변수 앞에 붙일 수 있고, 데코레이터는 적용된 요소(클래스, 메서드 등)와 함께 런타임에 실행된다. `@` 뒤의 `expression` 은 함수로, 데코레이터가 실행된다는 것은 데코레이터로 구현된 함수가 실행된다는 의미이다.
+데코레이터는 직접 만들어서 사용할수도 있지만 자주 사용되는 기능들은 이미 구현되어 있는 모듈이 있으므로 원하는 기능에 맞게 구현하거나 가져와 사용하면 된다.
+
+<br/>
+
+### 데코레이터의 구현
+
+보통 이미 만들어져 있는 데코레이터를 가져다 쓰겠지만, 아래처럼 직접 선언하여 쓰는 것도 가능하다.
+
+#### 메서드 데코레이터 예제
+
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+function deco(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log('target: ', target);
+  console.log('name: ', name);
+  console.log('descriptor: ', descriptor);
+}
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @deco
+  @Get()
+  getHello(): string {
+    console.log('Hello World!');
+    return this.appService.getHello();
+  }
+}
+```
+
+#### 실행결과
+```
+target:  {}
+name:  getHello
+descriptor:  {
+  value: [Function: getHello],
+  writable: true,
+  enumerable: false,
+  configurable: true
+}
+
+[...]
+
+Hello World!
+```
+
+메서드 데코레이터를 만들기 위해서는 `deco` 함수처럼 `target`, `name`, `descriptor` 세개의 인자를 받아야한다.
+<br/>참고로 `target`, `name`, `descriptor`는 변수명일 뿐이므로, 다른 이름으로 써도 된다.
+
+
+<br/>
+
+### 데코레이터 팩토리
+
+만약 데코레이터에 인자를 넘겨 데코레이터의 행동을 조절하고 싶다면 **데코레이터를 리턴하는 함수**, 즉 **데코레이터 팩토리**를 만들면 된다.
+
+#### 인자가 있는 데코레이터 예제
+
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+function deco(param: string) {
+  console.log('evaluate decorator');
+  return function (target: any, naem: string, descriptor: PropertyDescriptor) {
+    console.log(param);
+  };
+}
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @deco('deco')
+  @Get()
+  getHello(): string {
+    console.log('Hello World!');
+    return this.appService.getHello();
+  }
+}
+```
+
+#### 실행결과
+
+```
+evaluate decorator
+deco
+
+[...]
+
+Hello World!
+```
+
+<br/>
+
+### 데코레이터 합성
+
+하나의 요소에 여러가지 데코레이터를 사용할 수도 있는데, 이를 데코레이터의 합성이라고 표현한다.
+
+#### 데코레이터 합성 예제
+
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+function first() {
+  console.log('first(): factory evaluated');
+  return function (target: any, name: string, descriptor: PropertyDescriptor) {
+    console.log('first(): called');
+  };
+}
+
+function second() {
+  console.log('second(): factory evaluated');
+  return function (target: any, name: string, descriptor: PropertyDescriptor) {
+    console.log('second(): called');
+  };
+}
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @first()
+  @second()
+  @Get()
+  getHello(): string {
+    console.log('Hello World!');
+    return this.appService.getHello();
+  }
+}
+```
+
+#### 실행결과
+```
+first(): factory evaluated
+second(): factory evaluated
+second(): called
+first(): called
+
+[...]
+
+Hello World!
+```
+
+실행결과를 보면 평가(evaluate)는 위에서 아래로 진행되지만, 호출(call)은 아래에서 위로 되는 것을 알 수 있다.
+
+<br/>
+
+### 데코레이터 평가(evaluate)?
+데코레이터를 evaluate 한다는 표현을 쓰던데 데코레이터를 평가한다는게 정확히 무슨 의미인지 파악하기 어렵다...
+<br/>다른 글의 설명을 봤을 땐 **데코레이터가 실행되는 시점**을 데코레이터 **평가**라고 하며, 데코레이터가 적용되는 대상이 정의되는 단계에서 데코레이터 함수 자체가 실행되는 시점을 의미하는 것 같다.
+<br/>특히 이 부분이 헷갈리는 것은 **데코레이터 호출**과 혼동되기 때문인데, **데코레이터 호출**은 **데코레이터가 적용된 대상이 실행되는 시점**에 일어난다고 한다.
+
+즉... '데코레이터 함수 자체'가 실행되냐, '데코레이터 함수가 적용된 대상'이 실행되냐의 차이인 것 같은데.. 아직도 두루뭉술하게 느껴진다.
+이 부분은 TypeScript나 NestJS에 대한 이해도를 좀 더 높이고 다시 봐야할 것 같다.
+
+<br/>
+
+### 출처
+
+> [NestJS로 배우는 백엔드 프로그래밍 - 2.6 데코레이터](https://wikidocs.net/158481)
+<br/>[TypeScript Docs - 데코레이터](https://typescript-kr.github.io/pages/decorators.html)
+<br/>[타입스크립트 데코레이터 완벽 가이드](https://itchallenger.tistory.com/765)
